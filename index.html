@@ -1,0 +1,338 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResourceVault - Free Digital Study Resources & Templates</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#0f4c81',
+                            800: '#073359',
+                            900: '#0c2a4a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .ad-placeholder {
+            background-image: repeating-linear-gradient(45deg, #f8fafc, #f8fafc 10px, #f1f5f9 10px, #f1f5f9 20px);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- TOP LEADERBOARD AD BANNER -->
+    <div class="bg-slate-900 border-b border-slate-800 py-2.5 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-slate-400">
+            <span class="font-medium flex items-center gap-1.5 shrink-0">
+                <i class="fa-solid fa-bolt text-amber-400"></i> Free Instant Downloads — No Registration Needed
+            </span>
+            <!-- AdSense Slot Placeholder -->
+            <div class="ad-placeholder border border-slate-800 rounded px-4 py-1 text-center text-slate-500 w-full md:w-auto text-[11px] font-mono">
+                [ Google AdSense Top Leaderboard 728x90 ]
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN NAVBAR -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 gap-4">
+                
+                <!-- Logo -->
+                <div class="flex items-center gap-3 cursor-pointer select-none" onclick="resetFilters()">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-700 to-brand-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
+                        <i class="fa-solid fa-vault text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-tight text-slate-900">Resource<span class="text-brand-600">Vault</span></span>
+                        <span class="hidden sm:block text-[10px] text-slate-500 font-medium uppercase tracking-wider">Free Digital Library</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Search Bar -->
+                <div class="hidden md:flex flex-1 max-w-md mx-4">
+                    <div class="relative w-full">
+                        <input type="text" id="searchInput" onkeyup="handleSearch()" placeholder="Search diploma notes, KCSE past papers, CV templates..." class="w-full bg-slate-100 border border-slate-200 rounded-xl pl-10 pr-4 py-2 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-sm"></i>
+                    </div>
+                </div>
+
+                <!-- Header Actions -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <button onclick="openUploadModal()" class="flex items-center gap-2 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all shadow-md shadow-brand-600/20">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span class="hidden sm:inline">Upload Resource</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Search Bar -->
+            <div class="pb-3 md:hidden">
+                <div class="relative w-full">
+                    <input type="text" id="searchInputMobile" onkeyup="handleSearchMobile()" placeholder="Search notes, papers, templates..." class="w-full bg-slate-100 border border-slate-200 rounded-xl pl-10 pr-4 py-2 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-sm"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO BANNER -->
+    <section class="bg-gradient-to-b from-brand-900 via-slate-900 to-slate-900 text-white py-12 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-5xl mx-auto text-center relative z-10 space-y-4">
+            <span class="inline-flex items-center gap-1.5 px-3 me-2 py-1 rounded-full text-xs font-semibold bg-brand-500/20 text-brand-200 border border-brand-400/30">
+                <i class="fa-solid fa-circle-check text-emerald-400"></i> Free Educational Resources
+            </span>
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                Download Revision Materials & Professional Documents
+            </h1>
+            <p class="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base">
+                Access verified KCSE past papers, Diploma in IT study modules, ATS-friendly CV templates, and accounting guides with one click.
+            </p>
+            
+            <!-- Global Stats -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto pt-6 border-t border-slate-800 text-slate-300">
+                <div class="p-2">
+                    <p class="text-2xl font-bold text-white" id="statFiles">1,240+</p>
+                    <p class="text-xs text-slate-400">Total Resources</p>
+                </div>
+                <div class="p-2">
+                    <p class="text-2xl font-bold text-white" id="statDownloads">84,500+</p>
+                    <p class="text-xs text-slate-400">Total Downloads</p>
+                </div>
+                <div class="p-2">
+                    <p class="text-2xl font-bold text-white">100%</p>
+                    <p class="text-xs text-slate-400">Free Access</p>
+                </div>
+                <div class="p-2">
+                    <p class="text-2xl font-bold text-emerald-400">Verified</p>
+                    <p class="text-xs text-slate-400">PDF / DOCX Formats</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN BODY SECTION -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- CATEGORY FILTERS & BAR -->
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8 pb-4 border-b border-slate-200">
+            <!-- Filter Pills -->
+            <div class="flex items-center gap-2 overflow-x-auto w-full pb-2 md:pb-0 no-scrollbar" id="categoryPills">
+                <button onclick="filterCategory('All')" class="cat-btn active bg-brand-600 text-white px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all shadow-sm">All Resources</button>
+                <button onclick="filterCategory('Diploma in IT')" class="cat-btn bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all">Diploma in IT</button>
+                <button onclick="filterCategory('KCSE & Secondary')" class="cat-btn bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all">KCSE & Secondary</button>
+                <button onclick="filterCategory('CV & Career Templates')" class="cat-btn bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all">CV & Career Templates</button>
+                <button onclick="filterCategory('Past Exam Papers')" class="cat-btn bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all">Past Exam Papers</button>
+                <button onclick="filterCategory('Business & Accounting')" class="cat-btn bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all">Business & Accounting</button>
+            </div>
+
+            <!-- Sort By Selector -->
+            <div class="flex items-center gap-2 self-end md:self-auto shrink-0 text-sm text-slate-500">
+                <label for="sortSelect" class="font-medium">Sort by:</label>
+                <select id="sortSelect" onchange="handleSort()" class="bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <option value="popular">Most Popular</option>
+                    <option value="newest">Newest First</option>
+                    <option value="size">File Size</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- CONTENT LAYOUT GRID -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            
+            <!-- MAIN CARDS FEED (3 COLUMNS) -->
+            <div class="lg:col-span-3 space-y-6">
+                
+                <!-- Results Counter -->
+                <div class="flex items-center justify-between text-xs sm:text-sm text-slate-500 font-medium">
+                    <span id="resultsCount">Showing all documents</span>
+                    <span class="text-brand-600 cursor-pointer hover:underline" onclick="resetFilters()">Reset filters</span>
+                </div>
+
+                <!-- Cards Grid -->
+                <div id="resourceGrid" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <!-- Dynamic JavaScript Cards Injected Here -->
+                </div>
+
+                <!-- IN-FEED ADSENSE BANNER -->
+                <div class="my-8">
+                    <div class="ad-placeholder border border-dashed border-slate-300 rounded-2xl p-6 text-center text-slate-400">
+                        <p class="text-xs font-mono uppercase tracking-widest text-slate-400 mb-1">Sponsored Advertisement</p>
+                        <div class="py-4 text-xs font-mono text-slate-500">
+                            [ Google AdSense In-Feed Responsive Unit 728x90 ]
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty Search State -->
+                <div id="emptyState" class="hidden text-center py-16 bg-white rounded-2xl border border-slate-200 p-8">
+                    <i class="fa-solid fa-folder-open text-5xl text-slate-300 mb-4"></i>
+                    <h3 class="text-lg font-bold text-slate-800">No resources matched your search</h3>
+                    <p class="text-slate-500 text-sm mt-1">Try using broader search terms or choosing a different category.</p>
+                    <button onclick="resetFilters()" class="mt-4 bg-brand-600 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-brand-700 transition-colors">Clear All Filters</button>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDEBAR (ADS & CONTRIBUTIONS) -->
+            <aside class="space-y-6">
+                
+                <!-- Sidebar AdSense Banner 1 -->
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                    <p class="text-[10px] font-mono text-slate-400 uppercase tracking-wider text-center mb-2">Advertisement</p>
+                    <div class="ad-placeholder border border-slate-200 rounded-xl h-60 flex flex-col items-center justify-center text-slate-400 p-4 text-center">
+                        <i class="fa-rectangle-ad text-3xl mb-2 text-slate-300"></i>
+                        <span class="text-xs font-mono">Google AdSense<br>Sidebar Banner 300x250</span>
+                    </div>
+                </div>
+
+                <!-- Resource Upload Promo Box -->
+                <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-brand-900 text-white p-6 rounded-2xl shadow-md space-y-3">
+                    <div class="w-10 h-10 rounded-lg bg-brand-500/20 flex items-center justify-center text-brand-300">
+                        <i class="fa-solid fa-file-circle-plus text-lg"></i>
+                    </div>
+                    <h4 class="font-bold text-base">Have notes or templates to share?</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Join hundreds of contributors sharing academic kits, past papers, and resume formats with students and job seekers.
+                    </p>
+                    <button onclick="openUploadModal()" class="w-full bg-white text-slate-900 hover:bg-slate-100 py-2.5 rounded-xl text-xs font-bold transition-all shadow-sm">
+                        Submit a Document Now
+                    </button>
+                </div>
+
+                <!-- Sticky Sidebar AdSense Banner 2 -->
+                <div class="sticky top-24 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                    <p class="text-[10px] font-mono text-slate-400 uppercase tracking-wider text-center mb-2">Sponsored Content</p>
+                    <div class="ad-placeholder border border-slate-200 rounded-xl h-80 flex flex-col items-center justify-center text-slate-400 p-4 text-center">
+                        <i class="fa-solid fa-rectangle-ad text-3xl mb-2 text-slate-300"></i>
+                        <span class="text-xs font-mono">Google AdSense<br>Skyscraper 300x600</span>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- FOOTER AD BANNER -->
+    <div class="bg-slate-100 border-t border-slate-200 py-6 px-4">
+        <div class="max-w-5xl mx-auto">
+            <div class="ad-placeholder border border-slate-300 rounded-xl p-4 text-center text-xs font-mono text-slate-500">
+                [ Google AdSense Footer Responsive Unit 970x90 ]
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 text-sm py-8 px-4 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-lg bg-brand-600 flex items-center justify-center text-white text-xs font-bold">
+                    RV
+                </div>
+                <span class="text-white font-semibold">ResourceVault</span> &copy; 2026. Free Digital Library.
+            </div>
+            <div class="flex items-center gap-6 text-xs text-slate-400">
+                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                <a href="#" class="hover:text-white transition-colors">DMCA Takedowns</a>
+                <a href="#" class="hover:text-white transition-colors">Contact Admin</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- DOCUMENT PREVIEW MODAL -->
+    <div id="previewModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl border border-slate-100">
+            
+            <!-- Modal Header -->
+            <div class="bg-slate-50 p-5 border-b border-slate-100 flex items-start justify-between">
+                <div class="flex items-center gap-3">
+                    <div id="modalIcon" class="w-12 h-12 rounded-2xl bg-brand-100 text-brand-600 flex items-center justify-center text-xl font-bold shrink-0">
+                        <i class="fa-solid fa-file-pdf"></i>
+                    </div>
+                    <div>
+                        <span id="modalCategory" class="text-[11px] font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-2 py-0.5 rounded-md">Category</span>
+                        <h3 id="modalTitle" class="text-base sm:text-lg font-bold text-slate-900 leading-snug mt-1">Document Title</h3>
+                    </div>
+                </div>
+                <button onclick="closePreviewModal()" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-xl hover:bg-slate-200/50 transition-colors">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content Body -->
+            <div class="p-6 space-y-5 overflow-y-auto">
+                
+                <!-- Document Meta Bar -->
+                <div class="grid grid-cols-4 gap-2 bg-slate-50 p-3 rounded-2xl text-center text-xs text-slate-600 font-medium border border-slate-100">
+                    <div>
+                        <p class="text-slate-400 text-[10px] uppercase">Format</p>
+                        <p id="modalFormat" class="font-bold text-slate-800 text-sm mt-0.5">PDF</p>
+                    </div>
+                    <div>
+                        <p class="text-slate-400 text-[10px] uppercase">File Size</p>
+                        <p id="modalSize" class="font-bold text-slate-800 text-sm mt-0.5">3.4 MB</p>
+                    </div>
+                    <div>
+                        <p class="text-slate-400 text-[10px] uppercase">Views</p>
+                        <p id="modalViews" class="font-bold text-slate-800 text-sm mt-0.5">1,200</p>
+                    </div>
+                    <div>
+                        <p class="text-slate-400 text-[10px] uppercase">Downloads</p>
+                        <p id="modalDownloads" class="font-bold text-emerald-600 text-sm mt-0.5">850</p>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Document Overview</h4>
+                    <p id="modalDescription" class="text-slate-600 text-sm leading-relaxed">
+                        Detailed summary of this resource file...
+                    </p>
+                </div>
+
+                <!-- Simulated PDF/Document Viewer Container -->
+                <div>
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Live Document Preview</h4>
+                    <div class="border border-slate-200 rounded-2xl bg-slate-100 p-6 flex flex-col ite
